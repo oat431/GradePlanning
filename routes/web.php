@@ -18,5 +18,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::resource('student','App\Http\Controllers\StudentController');
 
+//main action
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::post('/user/login','App\Http\Controllers\Auth\LoginController@login');
+
+//student action
+Route::get('/student/create',[App\Http\Controllers\studentController::class,'create']);
+Route::post('/student','App\Http\Controllers\StudentController@store');
