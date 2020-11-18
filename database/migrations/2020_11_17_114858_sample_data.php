@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class SampleData extends Migration
 {
@@ -16,12 +17,16 @@ class SampleData extends Migration
         DB::table('users')->insert(
             array(
                 'student_id' => 622115000,
+                'password' => Hash::make('622115000'),
+                'email'=>'Dummy@Dummy',
                 'student_name' => 'Dummy Guy'
             )
         );
         DB::table('users')->insert(
             array(
                 'student_id' => 622115039,
+                'password' => Hash::make('622115039'),
+                'email'=>'Sahachan@Sahachan',
                 'student_name' => 'Sahachan Tippimwong'
             )
         );
