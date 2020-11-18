@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     /*
@@ -36,5 +37,26 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request){
+        $this->validate($request,[
+            'studentName' => 'required',
+            'studentID' => 'required'
+        ]);
+        $temp = $request->get('studentName');
+        $email = explode(" ",$temp)[0];
+        $user_data = array(
+            'email' => $email."@".$email,
+            'password' => $request->get('studentID')
+        ); 
+
+        if(Auth::attempt($user_data)){
+            return redirect('/');
+        }else{
+            $msg = "something wrong with studentID or studentName";
+            return view('auth.login',compact(['msg']));
+        }
+
     }
 }
