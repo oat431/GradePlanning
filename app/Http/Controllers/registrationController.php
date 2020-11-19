@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\registration;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class registrationController extends Controller
 {
@@ -13,7 +16,21 @@ class registrationController extends Controller
      */
     public function index()
     {
-        //
+        $student = Auth::user()->student_id;
+        $course = DB::select("SELECT course_id from registrations where student_id = ?",[$student]);
+        $data = DB::select("SELECT * FROM courses");
+        $tempData = [];
+        foreach($course as $item){
+            array_push($tempData,$item->course_id);
+        }
+        $realData = [];
+        foreach($data as $item){
+            if(!in_array($item->course_id,$tempData)){
+                $subject = DB::select("SELECT * from courses where course_id = ?",[$item->course_id]);
+                array_push($realData,$subject);
+            }
+        }
+        return view('enroll',compact(['realData']));
     }
 
     /**
@@ -34,7 +51,16 @@ class registrationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            "StudentID" => "required",
+            "CourseID" => "required"
+        ]);
+        $registration = new registration;
+        $registration->semester_name = "2/2020";
+        $registration->student_id = $request->get('StudentID');
+        $registration->course_id = $request->get('CourseID');
+        $registration->save();
+        return redirect('/');
     }
 
     /**
@@ -56,7 +82,13 @@ class registrationController extends Controller
      */
     public function edit($id)
     {
-        //
+        $course = DB::select("SELECT course_id FROM registrations where student_id=?",[$id]);
+        $realData = [];
+        foreach($course as $item){
+            $subject = DB::select("SELECT * from courses where course_id=?",[$item->course_id]);
+            array_push($realData,$subject);
+        }
+        return view('grading',compact(['realData']));
     }
 
     /**
