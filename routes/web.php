@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
+    if(Auth::check()){
+        return view('/student/'.Auth::user()->student_id);
+    }
     return view('welcome');
 });
 
@@ -22,8 +25,9 @@ Route::resource('student','App\Http\Controllers\StudentController');
 
 //main action
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::post('/user/login','App\Http\Controllers\Auth\LoginController@login');
+Route::post('/login','App\Http\Controllers\Auth\LoginController@login');
 
 //student action
 Route::get('/student/create',[App\Http\Controllers\studentController::class,'create']);
 Route::post('/student','App\Http\Controllers\StudentController@store');
+Route::get('/student/{id}','App\Http\Controllers\StudentController@show')->middleware('auth');
