@@ -15,13 +15,15 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     if(Auth::check()){
-        return view('/student/'.Auth::user()->student_id);
+        return redirect('/student/'.Auth::user()->student_id);
     }
     return view('welcome');
 });
 
 Auth::routes();
 Route::resource('student','App\Http\Controllers\StudentController');
+Route::resource('course','App\Http\Controllers\courseController');
+Route::resource('registration','App\Http\Controllers\registrationController');
 
 //main action
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -31,3 +33,12 @@ Route::post('/login','App\Http\Controllers\Auth\LoginController@login');
 Route::get('/student/create',[App\Http\Controllers\studentController::class,'create']);
 Route::post('/student','App\Http\Controllers\StudentController@store');
 Route::get('/student/{id}','App\Http\Controllers\StudentController@show')->middleware('auth');
+
+//course action
+Route::get('/course','App\Http\Controllers\courseController@index');
+
+//registration action
+Route::get('/enroll','App\Http\Controllers\registrationController@index');
+Route::post('/enrolled','App\Http\Controllers\registrationController@store');
+Route::get('/grade/{id}/grading','App\Http\Controllers\registrationController@edit');
+Route::post('/graded','App\Http\Controllers\registrationController@update');
