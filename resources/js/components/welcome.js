@@ -6,8 +6,10 @@ function Welcome(){
         <div className="container">
             <div className="row justify-content-center">
                 <div className="col-md-8">
-                    <a href="/login"><button className="btn btn-primary">Go to login</button></a>  
-                    <a href="/register"><button className="btn btn-primary">Reigister</button></a>
+                    <div className='card'>
+                        <div className='card-header'>The planning system</div>
+                        <div className='card-body'><a href='/course'>all the course in the system</a></div>
+                    </div>
                 </div>
             </div>
         </div>
