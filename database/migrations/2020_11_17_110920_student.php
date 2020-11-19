@@ -16,7 +16,7 @@ class Student extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('student_id');
             $table->string('student_name');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('password');
             $table->float('student_gpa')->default(0.00);
         });
