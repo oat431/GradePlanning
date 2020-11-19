@@ -52,7 +52,7 @@ class LoginController extends Controller
         ); 
 
         if(Auth::attempt($user_data)){
-            return redirect('/');
+            return redirect('/student/'.Auth::user()->student_id);
         }else{
             $msg = "something wrong with studentID or studentName";
             return view('auth.login',compact(['msg']));

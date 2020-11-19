@@ -60,7 +60,8 @@ class studentController extends Controller
      */
     public function show($id)
     {
-        //
+        DB::select('SELECT * FROM users WHERE student_id=?',[$id]);
+        return view('profile');
     }
 
     /**
