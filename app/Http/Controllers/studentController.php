@@ -17,7 +17,8 @@ class studentController extends Controller
      */
     public function index()
     {
-        //
+        $data = User::select("*")->get();
+        return $data->toJson();
     }
 
     /**
