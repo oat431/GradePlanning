@@ -73,7 +73,8 @@ class studentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = User::where("student_id",$id)->get();
+        return $data->toJson();
     }
 
     /**

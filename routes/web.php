@@ -33,7 +33,9 @@ Route::post('/login','App\Http\Controllers\Auth\LoginController@login');
 Route::get('/student/create',[App\Http\Controllers\studentController::class,'create']);
 Route::post('/student','App\Http\Controllers\StudentController@store');
 Route::get('/student/{id}','App\Http\Controllers\StudentController@show')->middleware('auth');
-
+Route::get('/student/{id}/edit',function(){
+    return view('editProfile');
+});
 //course action
 Route::get('/course','App\Http\Controllers\courseController@index');
 
