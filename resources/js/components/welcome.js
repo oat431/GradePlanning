@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 class Welcome extends Component {
     constructor() {
         super();
@@ -25,9 +25,9 @@ class Welcome extends Component {
                                 The planning system
                             </div>
                             <div className="card-body">
-                                <a href="/course">
-                                    all the course in the system
-                                </a>
+                                <Link to='/Allcourse'>
+                                    all course in the system
+                                </Link> 
                             </div>
                         </div>
                     </div>
@@ -66,4 +66,3 @@ class Welcome extends Component {
 
 export default Welcome;
 
-ReactDOM.render(<Welcome />, document.getElementById("welcome"));

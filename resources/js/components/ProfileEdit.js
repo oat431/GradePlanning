@@ -28,4 +28,3 @@ class ProfileEdit extends Component {
     }
 }
 export default ProfileEdit;
-ReactDOM.render(<ProfileEdit />,document.getElementById('editprofile'));
