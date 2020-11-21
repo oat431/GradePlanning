@@ -50,12 +50,11 @@ class LoginController extends Controller
             'email' => $email."@".$email,
             'password' => $request->get('studentID')
         ); 
-
+        print_r($user_data);
         if(Auth::attempt($user_data)){
-            return redirect('/student/'.Auth::user()->student_id);
+            return redirect('/');
         }else{
-            $msg = "something wrong with studentID or studentName";
-            return view('auth.login',compact(['msg']));
+            return view('layouts.app');
         }
 
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -14,8 +15,8 @@ class courseController extends Controller
      */
     public function index()
     {
-        $data = DB::select('SELECT * FROM courses');
-        return view('course',compact(['data']));
+        $data = Course::select('*')->get();
+        return $data->toJson();
     }
 
     /**
