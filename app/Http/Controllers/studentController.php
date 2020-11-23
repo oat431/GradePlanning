@@ -44,13 +44,13 @@ class studentController extends Controller
             "studentID" => "required"
         ]);
         $email = explode(" ",$data['studentName'])[0];
-        $student = new User;
-        $student->student_id = $data['studentID'];
-        $student->email = $email."@".$email;
-        $student->password = Hash::make($data['studentID']);
-        $student->student_name = $data['studentName'];
-        $student->save();
-        return redirect('/');
+        $student = User::create([
+            "student_id"=>$data['studentID'],
+            "email"=>$email."@".$email,
+            "password"=>Hash::make($data['studentID']),
+            "student_name"=>$data['studentName']
+        ]);
+        return response()->json("You are now registered");
     }
 
     /**

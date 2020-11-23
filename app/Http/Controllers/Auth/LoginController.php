@@ -39,23 +39,4 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login(Request $request){
-        $this->validate($request,[
-            'studentName' => 'required',
-            'studentID' => 'required'
-        ]);
-        $temp = $request->get('studentName');
-        $email = explode(" ",$temp)[0];
-        $user_data = array(
-            'email' => $email."@".$email,
-            'password' => $request->get('studentID')
-        ); 
-        print_r($user_data);
-        if(Auth::attempt($user_data)){
-            return redirect('/');
-        }else{
-            return view('layouts.app');
-        }
-
-    }
 }
