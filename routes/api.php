@@ -19,11 +19,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //main action
-Route::post('/signin','App\Http\Controllers\Auth\LoginController@login');
+Route::post('/signin','App\Http\Controllers\Auth\LoginController@login')->middleware("web");
+Route::post('/singout','App\Http\Controllers\Auth\LoginController@logout')->middleware("web");
 
 //student action
 Route::get('/student','App\Http\Controllers\studentController@index');
 Route::get('/student/{id}/Edit','App\Http\Controllers\studentController@edit');
+Route::post('/student','App\Http\Controllers\StudentController@store')->middleware("web");
 
 //course action
 Route::get('/course','App\Http\Controllers\courseController@index');
