@@ -1,74 +1,73 @@
-import axios from "axios";
-import React, { Component } from "react";
-class Login extends Component {
-    constructor(props) {
+import Axios from 'axios';
+import React,{ Component } from 'react';
+class Register extends Component {
+    constructor(props){
         super(props);
         this.state = {
-            studentName: "",
-            studentID: "",
-        };
+            StudentID : "",
+            StudentName : ""
+        }
+        this.register = this.register.bind(this);
         this.updateData = this.updateData.bind(this);
-        this.authentication = this.authentication.bind(this);
     }
-    updateData(event) {
+    updateData(event){
         this.setState({
-            [event.target.name]: event.target.value
+            [event.target.name]:event.target.value
         });
     }
-    authentication(event) {
+    register(event){
         event.preventDefault();
-        let email = this.state.studentName.split(" ");
-        const auth = {
-            email:email[0] + "@" + email[0],
-            password:this.state.studentID
-        };
-        axios.post("/api/signin", auth).then(res => {
+        let studentData = {
+            studentName:this.state.StudentName,
+            studentID:this.state.StudentID
+        }
+        Axios.post('/api/student',studentData).then(res=>{
             this.props.history.push('/');
-        });
+        })
     }
-    render() {
+    render(){
         return (
             <div className="container">
                 <div className="row justify-content-center">
                     <div className="col-md-8">
                         <div className="card">
-                            <div className="card-header">Sign in</div>
+                            <div className="card-header">Register</div>
                             <div className="card-body">
-                                <form onSubmit={this.authentication}>
-                                    <div className="form-group row">
+                                <form onSubmit={this.register}>
+                                <div className="form-group row">
                                         <label
-                                            htmlFor="studentName"
+                                            htmlFor="StudentName"
                                             className="col-md-4 col-form-label text-md-right"
                                         >
                                             Student name
                                         </label>
                                         <div className="col-md-6">
                                             <input
-                                                id="studentName"
+                                                id="StudentName"
                                                 type="text"
                                                 className="form-control"
-                                                name="studentName"
+                                                name="StudentName"
                                                 onChange={this.updateData}
-                                                value={this.state.studentName}
+                                                value={this.state.StudentName}
                                                 autoFocus
                                             />
                                         </div>
                                     </div>
                                     <div className="form-group row">
                                         <label
-                                            htmlFor="studentID"
+                                            htmlFor="StudentID"
                                             className="col-md-4 col-form-label text-md-right"
                                         >
                                             Student ID
                                         </label>
                                         <div className="col-md-6">
                                             <input
-                                                id="studentID"
+                                                id="StudentID"
                                                 type="text"
                                                 className="form-control"
-                                                name="studentID"
+                                                name="StudentID"
                                                 onChange={this.updateData}
-                                                value={this.state.studentID}
+                                                value={this.state.StudentID}
                                                 autoFocus
                                             />
                                         </div>
@@ -79,7 +78,7 @@ class Login extends Component {
                                                 type="submit"
                                                 className="btn btn-primary"
                                             >
-                                                Login
+                                                Register
                                             </button>
                                         </div>
                                     </div>
@@ -93,4 +92,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default Register;

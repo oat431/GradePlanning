@@ -5,6 +5,7 @@ import Header from "./Header";
 import Welcome from "./Welcome";
 import Course from "./Course";
 import Login from "./Login";
+import Register from "./Register";
 class App extends Component{
     render(){
         return (
@@ -15,6 +16,7 @@ class App extends Component{
                         <Route exact path='/' component={Welcome} />
                         <Route path='/Allcourse' component={Course} />
                         <Route path='/login' component={Login}/>
+                        <Route path='/student/create' component={Register} />
                     </Switch> 
                 </div>
            </BrowserRouter> 

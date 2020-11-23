@@ -1,8 +1,14 @@
+import Axios from "axios";
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 class Header extends Component {
+    //constructor(props){
+        //super(props);
+        //this.logout = this.logout.bind(this);
+        //this.isLogin = this.login.bind(this);
+    //}
     isLogin() {
-        var login = false;
+        let login = false;
         if (login) {
             return (
                 <div
@@ -22,7 +28,7 @@ class Header extends Component {
                                 aria-expanded="false"
                                 v-pre
                             >
-                                User name I guess
+                                Basic Authentication
                             </a>
                             <div
                                 className="dropdown-menu dropdown-menu-right"
@@ -30,9 +36,7 @@ class Header extends Component {
                             >
                                 <a
                                     className="dropdown-item"
-                                    href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"
+                                    onClick={this.logout} 
                                 >
                                     Logout
                                 </a>
@@ -43,7 +47,6 @@ class Header extends Component {
                                     method="POST"
                                     className="d-none"
                                 >
-                                    @csrf
                                 </form>
                             </div>
                         </li>
